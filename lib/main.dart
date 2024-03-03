@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'JokenPo - @gilmarodp',
           style: TextStyle(
             color: Colors.white,
@@ -104,7 +104,7 @@ class _HomeState extends State<Home> {
               children: [
                 Text(
                   'Emp: $drawAttempts',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: Colors.black,
@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
                 ),
                 Text(
                   'Ace: $okAttempts',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: Colors.lightGreen,
@@ -120,7 +120,7 @@ class _HomeState extends State<Home> {
                 ),
                 Text(
                   'Err: $failAttempts',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: Colors.redAccent,
@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            Text(
+            const Text(
               'Escolha do Aplicativo:',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
