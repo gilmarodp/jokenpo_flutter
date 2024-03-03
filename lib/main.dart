@@ -17,64 +17,48 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<String> options = [
+  final List<String> _options = [
     "pedra",
     "papel",
     "tesoura",
   ];
-  String optionRandom = 'padrao';
-  String message = 'Escolha uma das opções:';
-  Color messageVariant = Colors.black;
-  int drawAttempts = 0;
-  int okAttempts = 0;
-  int failAttempts = 0;
+  String _optionRandom = 'padrao';
+  String _message = 'Escolha uma das opções:';
+  Color _messageVariant = Colors.black;
+  int _drawAttempts = 0;
+  int _okAttempts = 0;
+  int _failAttempts = 0;
 
   newTry(String option) {
     int index = Random(DateTime.now().microsecond).nextInt(3);
-    optionRandom = options[index];
+    _optionRandom = _options[index];
 
-    if (option == optionRandom) {
+    if (option == _optionRandom) {
       setState(() {
-        message = 'Vocês empataram! :|';
-        messageVariant = Colors.black;
-        drawAttempts++;
+        _message = 'Vocês empataram! :|';
+        _messageVariant = Colors.black;
+        _drawAttempts++;
       });
     } else {
-      if (option == 'pedra' && optionRandom == 'papel') {
+      if (
+        (option == 'pedra' && _optionRandom == 'papel') ||
+        (option == 'papel' && _optionRandom == 'tesoura') ||
+        (option == 'tesoura' && _optionRandom == 'pedra')
+      ) {
         setState(() {
-          message = 'Você infelizmente perdeu... :(';
-          messageVariant = Colors.redAccent;
-          failAttempts++;
+          _message = 'Você infelizmente perdeu... :(';
+          _messageVariant = Colors.redAccent;
+          _failAttempts++;
         });
-      } else if (option == 'pedra' && optionRandom == 'tesoura') {
+      } else if (
+        (option == 'pedra' && _optionRandom == 'tesoura') ||
+        (option == 'papel' && _optionRandom == 'pedra') ||
+        (option == 'tesoura' && _optionRandom == 'papel')
+      ) {
         setState(() {
-          message = 'Você venceu! :D';
-          messageVariant = Colors.lightGreen;
-          okAttempts++;
-        });
-      } else if (option == 'papel' && optionRandom == 'tesoura') {
-        setState(() {
-          message = 'Você infelizmente perdeu... :(';
-          messageVariant = Colors.redAccent;
-          failAttempts++;
-        });
-      } else if (option == 'papel' && optionRandom == 'pedra') {
-        setState(() {
-          message = 'Você venceu! :D';
-          messageVariant = Colors.lightGreen;
-          okAttempts++;
-        });
-      } else if (option == 'tesoura' && optionRandom == 'pedra') {
-        setState(() {
-          message = 'Você infelizmente perdeu... :(';
-          messageVariant = Colors.redAccent;
-          failAttempts++;
-        });
-      } else if (option == 'tesoura' && optionRandom == 'papel') {
-        setState(() {
-          message = 'Você venceu! :D';
-          messageVariant = Colors.lightGreen;
-          okAttempts++;
+          _message = 'Você venceu! :D';
+          _messageVariant = Colors.lightGreen;
+          _okAttempts++;
         });
       }
     }
@@ -103,7 +87,7 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  'Emp: $drawAttempts',
+                  'Emp: $_drawAttempts',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -111,7 +95,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  'Ace: $okAttempts',
+                  'Ace: $_okAttempts',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -119,7 +103,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  'Err: $failAttempts',
+                  'Err: $_failAttempts',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -136,19 +120,19 @@ class _HomeState extends State<Home> {
                 color: Colors.black,
               ),
             ),
-            Icone(imagePath: 'images/$optionRandom.png'),
+            Icone(imagePath: 'images/$_optionRandom.png'),
             Text(
-              message,
+              _message,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
-                color: messageVariant,
+                color: _messageVariant,
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                for (var option in options) GestureDetector(
+                for (var option in _options) GestureDetector(
                   onTap: () => newTry(option),
                   child: Icone(imagePath: 'images/$option.png'),
                 ),
